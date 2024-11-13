@@ -46,9 +46,9 @@ CREATE TABLE netflix
 ```sql
 SELECT 
     type,
-    COUNT(*)
+    COUNT(*) as COUNT
 FROM netflix
-GROUP BY 1;
+GROUP BY type;
 ```
 
 **Objective:** Determine the distribution of content types on Netflix.
@@ -75,39 +75,7 @@ WHERE release_year = 2020;
 ```
 
 **Objective:** Retrieve all movies released in a specific year.
-
-### 4. Find the Top 5 Countries with the Most Content on Netflix
-
-```sql
-SELECT * 
-FROM
-(
-    SELECT 
-        UNNEST(STRING_TO_ARRAY(country, ',')) AS country,
-        COUNT(*) AS total_content
-    FROM netflix
-    GROUP BY 1
-) AS t1
-WHERE country IS NOT NULL
-ORDER BY total_content DESC
-LIMIT 5;
-```
-
-**Objective:** Identify the top 5 countries with the highest number of content items.
-
-### 5. Identify the Longest Movie
-
-```sql
-SELECT 
-    *
-FROM netflix
-WHERE type = 'Movie'
-ORDER BY SPLIT_PART(duration, ' ', 1)::INT DESC;
-```
-
-**Objective:** Find the movie with the longest duration.
-
-### 6. Find Content Added in the Last 5 Years
+### 4. Find Content Added in the Last 5 Years
 
 ```sql
 SELECT *
@@ -117,7 +85,7 @@ WHERE year(date_added) >= year(getdate())-5;
 
 **Objective:** Retrieve content added to Netflix in the last 5 years.
 
-### 7. Find All Movies/TV Shows by Director 'Rajiv Chilaka'
+### 5. Find All Movies/TV Shows by Director 'Rajiv Chilaka'
 
 ```sql
 SELECT *
@@ -127,25 +95,24 @@ WHERE director_name = 'Rajiv Chilaka';
 
 **Objective:** List all content directed by 'Rajiv Chilaka'.
 
-### 8. List All TV Shows with More Than 5 Seasons
+### 6. List All TV Shows with 5 Seasons
 
 ```sql
-SELECT *
-FROM netflix
-WHERE type = 'TV Show'
-  AND SPLIT_PART(duration, ' ', 1)::INT > 5;
+select * 
+from netflix
+where duration='5 seasons';
 ```
 
-**Objective:** Identify TV shows with more than 5 seasons.
+**Objective:** Identify TV shows with 5 seasons.
 
 ### 9. Count the Number of Content Items in Each Genre
 
 ```sql
 SELECT 
-    UNNEST(STRING_TO_ARRAY(listed_in, ',')) AS genre,
-    COUNT(*) AS total_content
+    listed_in as genre,
+    COUNT(*) as total_content
 FROM netflix
-GROUP BY 1;
+GROUP BY listed_in;
 ```
 
 **Objective:** Count the number of content items in each genre.
