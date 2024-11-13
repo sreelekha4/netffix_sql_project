@@ -3,14 +3,14 @@
 ![](https://github.com/sreelekha4/netffix_sql_project/blob/main/logo.png)
 
 ## Overview
-This project involves a comprehensive analysis of Netflix's movies and TV shows data using SQL. The goal is to extract valuable insights and answer various business questions based on the dataset. The following README provides a detailed account of the project's objectives, business problems, solutions, findings, and conclusions.
+This project is about analysis of Netflix's movies and TV shows data using SQL. The goal is to find useful insights and answer business-related questions based on the dataset. This README explains the project's goals, business questions, solutions, key findings, and conclusions in detail.
 
 ## Objectives
 
 - Analyze the distribution of content types (movies vs TV shows).
-- Identify the most common ratings for movies and TV shows.
+- Find the most common ratings for movies and TV shows.
 - List and analyze content based on release years, countries, and durations.
-- Explore and categorize content based on specific criteria and keywords.
+- Analyze and group content based on specific criteria and keywords.
 
 ## Dataset
 
@@ -75,7 +75,7 @@ WHERE release_year = 2020;
 ```
 
 **Objective:** Retrieve all movies released in a specific year.
-### 4. Find Content Added in the Last 5 Years
+### 4. find Content Added within the past 5 Years
 
 ```sql
 SELECT *
@@ -83,7 +83,7 @@ FROM netflix
 WHERE year(date_added) >= year(getdate())-5;
 ```
 
-**Objective:** Retrieve content added to Netflix in the last 5 years.
+**Objective:** find content added to Netflix in the past 5 years.
 
 ### 5. Find All Movies/TV Shows by Director 'Rajiv Chilaka'
 
