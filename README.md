@@ -1,6 +1,6 @@
 # Netflix Movies and TV Shows Data Analysis using SQL
 
-![](https://github.com/najirh/netflix_sql_project/blob/main/logo.png)
+![](https://github.com/sreelekha4/netffix_sql_project/blob/main/logo.png))
 
 ## Overview
 This project involves a comprehensive analysis of Netflix's movies and TV shows data using SQL. The goal is to extract valuable insights and answer various business questions based on the dataset. The following README provides a detailed account of the project's objectives, business problems, solutions, findings, and conclusions.
@@ -28,7 +28,7 @@ CREATE TABLE netflix
     type         VARCHAR(10),
     title        VARCHAR(250),
     director     VARCHAR(550),
-    casts        VARCHAR(1050),
+    cast        VARCHAR(1050),
     country      VARCHAR(550),
     date_added   VARCHAR(55),
     release_year INT,
@@ -53,30 +53,15 @@ GROUP BY 1;
 
 **Objective:** Determine the distribution of content types on Netflix.
 
-### 2. Find the Most Common Rating for Movies and TV Shows
+### 2. Find the Rating for Movies and TV Shows
 
 ```sql
-WITH RatingCounts AS (
-    SELECT 
-        type,
-        rating,
-        COUNT(*) AS rating_count
-    FROM netflix
-    GROUP BY type, rating
-),
-RankedRatings AS (
-    SELECT 
-        type,
-        rating,
-        rating_count,
-        RANK() OVER (PARTITION BY type ORDER BY rating_count DESC) AS rank
-    FROM RatingCounts
-)
 SELECT 
     type,
-    rating AS most_frequent_rating
-FROM RankedRatings
-WHERE rank = 1;
+    rating,
+    COUNT(*) AS rating_count
+    FROM netflix
+    GROUP BY type, rating
 ```
 
 **Objective:** Identify the most frequently occurring rating for each type of content.
@@ -127,7 +112,7 @@ ORDER BY SPLIT_PART(duration, ' ', 1)::INT DESC;
 ```sql
 SELECT *
 FROM netflix
-WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years';
+WHERE year(date_added) >= year(getdate())-5;
 ```
 
 **Objective:** Retrieve content added to Netflix in the last 5 years.
@@ -136,12 +121,7 @@ WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
 
 ```sql
 SELECT *
-FROM (
-    SELECT 
-        *,
-        UNNEST(STRING_TO_ARRAY(director, ',')) AS director_name
-    FROM netflix
-) AS t
+FROM netflix
 WHERE director_name = 'Rajiv Chilaka';
 ```
 
@@ -217,27 +197,12 @@ WHERE director IS NULL;
 SELECT * 
 FROM netflix
 WHERE casts LIKE '%Salman Khan%'
-  AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
+  AND release_year > year(getdate())-10;
 ```
 
 **Objective:** Count the number of movies featuring 'Salman Khan' in the last 10 years.
 
-### 14. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
-
-```sql
-SELECT 
-    UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
-    COUNT(*)
-FROM netflix
-WHERE country = 'India'
-GROUP BY actor
-ORDER BY COUNT(*) DESC
-LIMIT 10;
-```
-
-**Objective:** Identify the top 10 actors with the most appearances in Indian-produced movies.
-
-### 15. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
+### 14. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
 
 ```sql
 SELECT 
