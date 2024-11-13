@@ -105,7 +105,7 @@ where duration='5 seasons';
 
 **Objective:** Identify TV shows with 5 seasons.
 
-### 9. Count the Number of Content Items in Each Genre
+### 7. Count the Number of Content Items in Each Genre
 
 ```sql
 SELECT 
@@ -117,7 +117,7 @@ GROUP BY listed_in;
 
 **Objective:** Count the number of content items in each genre.
 
-### 10.Find each year and the average numbers of content release in India on netflix. 
+### 8.Find each year and the average numbers of content release in India on netflix. 
 return top 5 year with highest avg content release!
 
 ```sql
@@ -138,7 +138,7 @@ LIMIT 5;
 
 **Objective:** Calculate and rank years by the average number of content releases by India.
 
-### 11. List All Movies that are Documentaries
+### 9. List All Movies that are Documentaries
 
 ```sql
 SELECT * 
@@ -148,7 +148,7 @@ WHERE listed_in LIKE '%Documentaries';
 
 **Objective:** Retrieve all movies classified as documentaries.
 
-### 12. Find All Content Without a Director
+### 10. Find All Content Without a Director
 
 ```sql
 SELECT * 
@@ -158,7 +158,7 @@ WHERE director IS NULL;
 
 **Objective:** List content that does not have a director.
 
-### 13. Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
+### 11. Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
 
 ```sql
 SELECT * 
@@ -169,7 +169,7 @@ WHERE casts LIKE '%Salman Khan%'
 
 **Objective:** Count the number of movies featuring 'Salman Khan' in the last 10 years.
 
-### 14. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
+### 12. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
 
 ```sql
 SELECT 
